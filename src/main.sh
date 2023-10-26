@@ -3,11 +3,10 @@
 # Function to check if a dep is installed
 check_command() {
     if command -v "$1" &>/dev/null; then
-        echo "$1 is installed."
     else
         echo "$1 is not installed but required"
         while true; do
-            read -p "Do you want to install $1 (yes/no)? " choice
+            read -p "do you want to install $1 (yes/no)? " choice
             case "$choice" in
                 [Yy]*)
                     sudo apt-get install -y "$1"
@@ -18,7 +17,7 @@ check_command() {
                     break
                     ;;
                 *)
-                    echo "Please enter 'yes' or 'no'."
+                    echo "please enter 'yes' or 'no'."
                     ;;
             esac
         done
