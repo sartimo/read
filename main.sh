@@ -62,10 +62,10 @@ else
     echo "Book not found."
 fi
 
-html2text "$basePath/$chosenLinkName.html" > "$basePath/$chosenLinkName.txt"
+# html2text "$basePath/$chosenLinkName.html" > "$basePath/$chosenLinkName.txt"
 
 # Convert text file to a man page using pandoc
-pandoc -s "$basePath/$chosenLinkName.txt" -t man -o "$basePath/$chosenLinkName.1"
+pandoc -s "$basePath/$chosenLinkName.html" -t man -o "$basePath/$chosenLinkName.1"
 
 # Install the generated man page
 sudo mkdir -p /usr/local/share/man/man1
