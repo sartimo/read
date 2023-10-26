@@ -1,6 +1,21 @@
-# Define the path to your file
-$filePath = ".\Readfile.txt"
 
+
+# Define the path to your file
+$username = $env:USERNAME
+$basePath = "C:/Users/${username}/booktmp/"
+
+$pathExists = (Test-Path -Path "C:/Users/${username}/booktmp/")
+if (!($pathExists)) {
+    New-Item -ItemType Directory -Path "C:/Users/${username}/booktmp/"
+}
+
+
+$filePath = "C:/Users/${username}/booktmp/Readfile.txt"
+$registryPath = "https://raw.githubusercontent.com/sartimo/read/main/Readfile"
+
+Invoke-WebRequest -Uri $registryPath -OutFile $filePath
+Write-Host "Successfully fetched Latest Readfile from ${registryPath}."
+Write-Host "Saved to ${filePath}"
 # Initialize an empty hashtable to store the links
 $links = @{}
 
@@ -20,6 +35,16 @@ Get-Content -Path $filePath | ForEach-Object {
     }
 }
 
+# Display a list of all link names
+Write-Host "List of all available Books:"
+Write-Host ""
+
+$links.Keys | ForEach-Object {
+    Write-Host $_
+}
+
+Write-Host ""
+
 # Prompt the user to choose a link
 $chosenLinkName = Read-Host "Enter the Book you want to read"
 
@@ -30,6 +55,12 @@ if ($links.ContainsKey($chosenLinkName)) {
 
     # Display the chosen link
     Write-Host "Chosen Book: $chosenLink"
+
+    $linkExists = (Test-Path -Path "$basePath/$chosenLinkName.html")
+    if (!($pathExists)) {
+        Invoke-WebRequest -Uri $chosenLink -OutFile "$basePath/$chosenLinkName.html"
+
+    }
 } else {
     Write-Host "Book not found."
 }
