@@ -1,5 +1,7 @@
 #!/bin/bash
 
+apt-get install curl, pandoc, git -y
+
 # Define the path to your file
 username=$USER
 basePath="/home/$username/booktmp/"
