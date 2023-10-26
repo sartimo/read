@@ -98,7 +98,30 @@ while getopts "fetchlistversionhelp" opt; do
     esac
 done
 
-# If no options are provided or the options are not recognized, show usage
+# Function to select and curl a link
+select() {
+    local link_name link_url
+
+    while IFS=: read -r link_name link_url; do
+        echo "$link_name"
+    done < ~/.librc
+
+    read -p "Choose a name to curl (or 'q' to quit): " choice
+    if [ "$choice" == "q" ]; then
+        return
+    fi
+
+    link_url=$(grep -m 1 "^$choice:" links.rc | cut -d ':' -f 2)
+
+    if [ -n "$link_url" ]; then
+        echo "Curling $choice ($link_url)..."
+        curl -O "$link_url"
+    else
+        echo "Invalid selection. Please choose a valid name or 'q' to quit."
+    fi
+}
+
+# If no options are provided or the options are not recognized, run read program
 if [ $OPTIND -eq 1 ]; then
-    usage
+    select
 fi
