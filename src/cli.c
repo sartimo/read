@@ -49,7 +49,7 @@ size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream) {
 
 int main(int argc, char *argv[]) {
     const char *url = "https://github.com/sartimo/lib/.librc";
-    const char *path = "~/.librc";
+    const char *path = ".librc";
 
     // check if rcfile exists
     if (fileExists(path)) {
