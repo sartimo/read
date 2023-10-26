@@ -30,7 +30,16 @@ check_command "html2text"
 file_path="~/.librc"
 
 if [ -e "$file_path" ]; then
-    echo "Found lib config at: $file_path"
+    echo "found lib config at: $file_path"
 else
-    echo "File $file_path does not exist"
+    echo "file $file_path does not exist"
+    echo "fetching config into $file_path..."
+
+    curl https://raw.githubusercontent.com/sartimo/lib/main/.librc >> $file_path
+
+    if [ $? -eq 0 ]; then
+        echo "successfully fetched .librc from registry into $file_path"
+    else
+        echo "couldn't fetch rc file from registry. check internet connectivity"
+    fi
 fi
