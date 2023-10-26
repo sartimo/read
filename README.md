@@ -1,2 +1,2 @@
-# lib
-a slightly lunatic implementation for a terminal html reader
+# read
+a slightly lunatic implementation for a terminal reader
