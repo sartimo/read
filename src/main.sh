@@ -51,10 +51,10 @@ fi
 usage() {
     echo "Usage: $0 [options]"
     echo "Options:"
-    echo "  -a    Execute function A"
-    echo "  -b    Execute function B"
-    echo "  -c    Execute function C"
-    echo "  -h    Show help"
+    echo "  -fetch      Execute function A"
+    echo "  -list       Execute function B"
+    echo "  -version    Execute function C"
+    echo "  -help       Show help"
     exit 1
 }
 
