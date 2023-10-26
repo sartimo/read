@@ -72,6 +72,7 @@ int main(int argc, char *argv[]) {
             case 'update':
                 update();
                 break;
+                exit(0);
             default:
                 // default routine
                 fprintf(stderr, "Usage: %s -update [argument]\n", argv[0]);
