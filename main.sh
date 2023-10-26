@@ -57,10 +57,22 @@ if [ -v "links[$chosenLinkName]" ]; then
     if [ ! -f "$basePath/$chosenLinkName.html" ]; then
         # Download the chosen link
         curl -o "$basePath/$chosenLinkName.html" "$chosenLink"
-        html2text "$basePath/$chosenLinkName.html"  >> $basePath/$chosenLinkName.txt
-        rm $basePath/$chosenLinkName.html
-        nano $basePath/$chosenLinkName.txt
     fi
 else
     echo "Book not found."
 fi
+
+html2text "$basePath/$chosenLinkName.html" > "$basePath/$chosenLinkName.txt"
+
+# Convert text file to a man page using pandoc
+pandoc -s "$basePath/$chosenLinkName.txt" -t man -o "$basePath/$chosenLinkName.1"
+
+# Install the generated man page
+sudo mkdir -p /usr/local/share/man/man1
+sudo mv "$basePath/$chosenLinkName.1" /usr/local/share/man/man1/
+
+# Update man page index
+sudo mandb
+
+# Display the man page
+man "$chosenLinkName"
