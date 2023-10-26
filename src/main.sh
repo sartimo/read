@@ -3,7 +3,7 @@
 # Function to check if a dep is installed
 check_command() {
     if command -v "$1" &>/dev/null; then
-        continue
+        echo ""
     else
         echo "$1 is not installed but required"
         while true; do
@@ -28,7 +28,7 @@ check_command() {
 check_command "curl"
 check_command "html2text"
 
-file_path="~/.librc"
+file_path="/links.rc"
 version="0.0.1"
 
 # check if rcfile exist
@@ -38,7 +38,7 @@ else
     echo "file $file_path does not exist"
     echo "fetching config into $file_path..."
 
-    curl https://raw.githubusercontent.com/sartimo/lib/main/.librc >> $file_path
+    curl https://raw.githubusercontent.com/sartimo/lib/main/links.rc >> $file_path
 
     if [ $? -eq 0 ]; then
         echo "successfully fetched .librc from registry into $file_path"
@@ -104,7 +104,7 @@ select() {
 
     while IFS=: read -r link_name link_url; do
         echo "$link_name"
-    done < ~/.librc
+    done < /links.rc
 
     read -p "Choose a name to curl (or 'q' to quit): " choice
     if [ "$choice" == "q" ]; then
