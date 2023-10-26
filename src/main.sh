@@ -99,7 +99,7 @@ while getopts "fetchlistversionhelp" opt; do
 done
 
 # Function to select and curl a link
-select() {
+selectlink() {
     local link_name link_url
 
     while IFS=: read -r link_name link_url; do
@@ -123,5 +123,5 @@ select() {
 
 # If no options are provided or the options are not recognized, run read program
 if [ $OPTIND -eq 1 ]; then
-    select
+    selectlink
 fi
