@@ -10,6 +10,15 @@ a slightly lunatic implementation for a terminal reader using bash, html2text, p
 
 ## usage 
 
-```bash
+simply configure the books you wanna read in the Readfile located at /home/$user/booktmp/Readfile.txt in the following format:
 
+```txt
+<shortcode>:<book URL>
+```
+
+then run the script and choose a book shortcode from the Readfile
+
+```bash
+chmod +x ./main.sh
+./main.sh
 ```
