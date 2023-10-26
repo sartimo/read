@@ -111,7 +111,7 @@ selectlink() {
         return
     fi
 
-    link_url=$(grep -m 1 "^$choice:" links.rc | cut -d ':' -f 2)
+    link_url=$(grep -m 1 "^$choice:" /links.rc | cut -d ':' -f 2)
 
     if [ -n "$link_url" ]; then
         echo "Curling $choice ($link_url)..."
